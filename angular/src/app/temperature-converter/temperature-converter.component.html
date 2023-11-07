@@ -1,0 +1,8 @@
+<div>
+  <input type="number" [value]="celsius" name="celsius" class="w-20 border p-1"
+         (input)="adjustCelsius($event)">
+  <span class="mx-3">Celsius = </span>
+  <input type="number" [value]="fahrenheit" name="fahrenheit" class="w-20 border p-1"
+         (input)="adjustFahrenheit($event)">
+  <span class="ml-3">Fahrenheit</span>
+</div>

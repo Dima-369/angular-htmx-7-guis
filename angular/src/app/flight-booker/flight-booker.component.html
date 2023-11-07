@@ -1,0 +1,30 @@
+<div class="flex max-w-xs flex-col">
+
+  <select [(ngModel)]="type" class="p-2">
+    <option value="one-way">one-way flight</option>
+    <option value="return">return flight</option>
+  </select>
+
+  <input
+    (input)="onFromChange($event)"
+    [ngClass]="isFromValid()"
+    [value]="from"
+    class="my-2 border p-1"
+    placeholder="27.03.2014" type="text">
+
+  <input
+    (input)="onToChange($event)"
+    [disabled]="type === 'one-way'"
+    [ngClass]="isToValid()"
+    [value]="to"
+    class="mb-2 border p-1 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400"
+    placeholder="27.03.2014"
+    type="text">
+
+  <button
+    (click)="book()"
+    [disabled]="bookDisabled()"
+    class="rounded-lg border bg-gray-100 px-3 py-2 text-black disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400">
+    Book
+  </button>
+</div>
