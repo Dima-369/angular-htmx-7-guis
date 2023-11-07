@@ -29,7 +29,7 @@ Apparently, I was not able to get Hot Reload going with the backend server. Mayb
 
 * TODOs
 
-- deploy Angular on Github Pages with CI?
+- deploy Angular on Github Pages with CI or on netlify?
 - show demo screenshots or videos?
 - finish all tasks (3/7 done)
 - add tests for the non HTMX Components
