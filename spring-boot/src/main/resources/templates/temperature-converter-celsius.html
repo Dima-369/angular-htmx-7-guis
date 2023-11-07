@@ -1,0 +1,8 @@
+<!--suppress XmlUnboundNsPrefix, HtmlFormInputWithoutLabel -->
+<input class="w-20 border p-1" hx-post="http://localhost:8083/temperature-converter-from-fahrenheit"
+       hx-swap="outerHTML" hx-target="#input-celsius"
+       hx-trigger="change"
+       id="input-celsius"
+       name="celsius"
+       th:value="${celsius}"
+       type="number">

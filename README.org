@@ -1,0 +1,20 @@
+* Angular and HTMX solutions to 7 GUIs
+
+Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083
+
+In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution there. It is initiated like this, for example, from =src/app/flight-booker-htmx/flight-booker-htmx.component.html=:
+
+#+begin_src html
+<form class="flex items-center" id="div-flight-booker"
+      hx-get="http://localhost:8083/flight-booker-update"
+      hx-trigger="load">
+</form>
+#+end_src
+
+* TODO
+
+- deploy Angular on Github Pages?
+- show demo screenshots or videos?
+- finish all tasks (3/7 done)
+- add tests for the non HTMX Components
+- brush over DRY principal everywhere

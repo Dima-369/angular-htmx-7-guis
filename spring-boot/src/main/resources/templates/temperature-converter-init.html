@@ -1,0 +1,21 @@
+<form class="w-full">
+    <!--suppress HtmlFormInputWithoutLabel -->
+    <input class="w-20 border p-1" hx-post="http://localhost:8083/temperature-converter-from-celsius"
+           hx-swap="outerHTML" hx-target="#input-fahrenheit"
+           hx-trigger="input"
+           id="input-celsius"
+           name="celsius"
+           type="number"
+           value="5">
+    <span class="mx-3">Celsius = </span>
+
+    <!--suppress HtmlFormInputWithoutLabel -->
+    <input class="w-20 border p-1" hx-post="http://localhost:8083/temperature-converter-from-fahrenheit"
+           hx-swap="outerHTML" hx-target="#input-celsius"
+           hx-trigger="input"
+           id="input-fahrenheit"
+           name="fahrenheit"
+           type="number"
+           value="41">
+    <span class="ml-3">Fahrenheit</span>
+</form>
