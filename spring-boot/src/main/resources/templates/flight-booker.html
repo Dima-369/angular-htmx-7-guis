@@ -5,7 +5,7 @@
             class="p-2"
             hx-post="http://localhost:8083/flight-booker-update"
             hx-target="#div-flight-booker"
-            hx-trigger="click"
+            hx-trigger="change"
             id="select-flight-booker-type"
             name="type">
         <option value="one-way" th:selected="${oneWay}">
@@ -18,7 +18,7 @@
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
-            class="mb-2 border p-1 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400"
+            class="my-2 border p-1 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400"
             hx-post="http://localhost:8083/flight-booker-update"
             hx-target="#div-flight-booker"
             hx-trigger="input"

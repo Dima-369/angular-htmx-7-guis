@@ -15,13 +15,15 @@ In development, I develop the Angular version first to have the UI going and the
 </form>
 #+end_src
 
-The 7 GUI tasks are not optimal for HTMX as all user interactions result in a network call to the backend. Nevertheless, I surprisingly don't see any noticeable negative effects on the localhost and I enjoy the pure HTMX solutions more, as Java is fun to work with!
+HTMX is not optimal for the 7 GUI tasks, as each user interactions triggers a network call to the Java backend and returns HTML. The HTMX solutions are generally slower in the millisecond range compared to the pure Angular ones, but the delay is minimal, at least when the server is accessed through localhost.
+
+Nevertheless, I personally find the pure HTMX solutions more enjoyable, as working with Java is fun!
 
 * Java backend server for HTMX
 
 The backend uses Spring Boot 3.1.5, Java 17, Gradle and Thymeleaf 3.1.2 and starts on port 8083 when launched.
 
-Apparently, I was not able to get Hot Reload going with the backend server. Maybe it is not possible in Intellij Community Edition?
+Apparently, I was not able to get Hot Reload going with the backend server. Maybe it is not possible in Intellij Community Edition? So, I have to restart the server on any change to test it out which is a bit annoying.
 
 * TODOs
 

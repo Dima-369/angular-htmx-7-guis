@@ -64,7 +64,7 @@ public class FlightBookerController {
     public String book(
             @RequestParam(value = "type") String type,
             @RequestParam(value = "from") String from,
-            @RequestParam(value = "to") String to,
+            @RequestParam(value = "to", required = false) String to,
             Model model) {
 
         final String alertMessage;
