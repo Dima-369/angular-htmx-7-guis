@@ -4,9 +4,9 @@ Solutions to this: https://eugenkiss.github.io/7guis/tasks/
 
 ** Infos
 
-Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083 - but if it is not running, that's fine as well, the pure Angular components will still work just fine.
+Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083 - but if it is not running, that's fine as well; the pure Angular components will still work just fine.
 
-In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution there. The HTMX is initiated like this, for example in =src/app/flight-booker-htmx/flight-booker-htmx.component.html=:
+In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution over there. The HTMX is initiated like this, for example in =src/app/flight-booker-htmx/flight-booker-htmx.component.html=:
 
 #+begin_src html
 <form class="flex items-center" id="div-flight-booker"
@@ -15,11 +15,11 @@ In development, I develop the Angular version first to have the UI going and the
 </form>
 #+end_src
 
-The 7 GUI tasks are not optimal for HTMX, as all user interactions lead to one network call to the backend. Still, on localhost, I surprisingly do not see any noticeable negative impact and I enjoy the HTMX pure solutions more, since Java is just quite good!
+The 7 GUI tasks are not optimal for HTMX as all user interactions result in a network call to the backend. Nevertheless, I surprisingly don't see any noticeable negative effects on the localhost and I enjoy the pure HTMX solutions more, as Java is simply quite strong!
 
 * TODOs
 
-- deploy Angular on Github Pages?
+- deploy Angular on Github Pages with CI?
 - show demo screenshots or videos?
 - finish all tasks (3/7 done)
 - add tests for the non HTMX Components
