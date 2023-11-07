@@ -2,6 +2,8 @@
 
 Solutions to this: https://eugenkiss.github.io/7guis/tasks/
 
+[[https://github.com/Dima-369/angular-htmx-7-guis/blob/master/screenshots/1.png?raw=true]]
+
 ** Infos
 
 Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083 - but if it is not running, that's fine as well; the pure Angular components will still work just fine.
