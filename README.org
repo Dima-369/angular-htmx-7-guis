@@ -1,8 +1,12 @@
 * Angular and HTMX solutions to 7 GUIs
 
-Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083
+Solutions to this: https://eugenkiss.github.io/7guis/tasks/
 
-In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution there. It is initiated like this, for example, from =src/app/flight-booker-htmx/flight-booker-htmx.component.html=:
+** Infos
+
+Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083 - but if it is not running, that's fine as well, the pure Angular components will still work just fine.
+
+In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution there. The HTMX is initiated like this, for example in =src/app/flight-booker-htmx/flight-booker-htmx.component.html=:
 
 #+begin_src html
 <form class="flex items-center" id="div-flight-booker"
@@ -11,7 +15,9 @@ In development, I develop the Angular version first to have the UI going and the
 </form>
 #+end_src
 
-* TODO
+The 7 GUI tasks are not optimal for HTMX, as all user interactions lead to one network call to the backend. Still, on localhost, I surprisingly do not see any noticeable negative impact and I enjoy the HTMX pure solutions more, since Java is just quite good!
+
+* TODOs
 
 - deploy Angular on Github Pages?
 - show demo screenshots or videos?
