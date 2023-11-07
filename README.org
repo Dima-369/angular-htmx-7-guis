@@ -15,7 +15,11 @@ In development, I develop the Angular version first to have the UI going and the
 </form>
 #+end_src
 
-The 7 GUI tasks are not optimal for HTMX as all user interactions result in a network call to the backend. Nevertheless, I surprisingly don't see any noticeable negative effects on the localhost and I enjoy the pure HTMX solutions more, as Java is simply quite strong!
+The 7 GUI tasks are not optimal for HTMX as all user interactions result in a network call to the backend. Nevertheless, I surprisingly don't see any noticeable negative effects on the localhost and I enjoy the pure HTMX solutions more, as Java is fun to work with!
+
+* Java backend
+
+The backend uses Spring Boot 3.1.5, Java 17, Gradle and Thymeleaf 3.1.2 and starts on port 8083 when launched.
 
 * TODOs
 
