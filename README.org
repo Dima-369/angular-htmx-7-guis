@@ -1,8 +1,12 @@
 * Angular and HTMX solutions to 7 GUIs
 
-Solutions to this: https://eugenkiss.github.io/7guis/tasks/
+Live Demo: https://angular-7-guis.netlify.app/
+
+Funny note: If you have the Java backend server running under http://localhost:8083, the HTMX components in the Live Demo link above will also work!
 
 [[https://github.com/Dima-369/angular-htmx-7-guis/blob/master/screenshots/1.png?raw=true]]
+
+The 7 GUI tasks are detailed here: https://eugenkiss.github.io/7guis/tasks/
 
 ** Infos
 
@@ -29,8 +33,6 @@ Apparently, I was not able to get Hot Reload going with the backend server. Mayb
 
 * TODOs
 
-- deploy Angular on Github Pages with CI or on netlify?
-- show demo screenshots or videos?
 - finish all tasks (3/7 done)
 - add tests for the non HTMX Components
 - brush over DRY principal everywhere
