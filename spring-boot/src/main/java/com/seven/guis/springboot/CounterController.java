@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CounterController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/counter", method = RequestMethod.POST)
+    @RequestMapping(value = "/counter", method = {RequestMethod.GET, RequestMethod.POST})
     public String counter(@RequestParam(value = "counter", defaultValue = "-1") int counter, Model model) {
         model.addAttribute("counter", counter + 1);
         return "counter";
