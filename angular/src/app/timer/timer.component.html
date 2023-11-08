@@ -1,1 +1,36 @@
-<p>timer works!</p>
+<table>
+  <tbody>
+  <tr>
+    <td class="pr-2">Elapsed Time:</td>
+    <td>
+      <progress
+        [max]="maxTimeMs"
+        [value]="progressValueMs"
+        class="w-full rounded-xl align-middle bg-gray-300"></progress>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="py-2">{{ formatElapsed() }}</td>
+  </tr>
+  <tr>
+    <td>Duration:</td>
+    <td>
+      <input
+        (input)="updateDuration($event)"
+        [max]="maxTimeMs"
+        [value]="durationMs"
+        min="0"
+        name="duration"
+        type="range"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button
+        (click)="reset()"
+        class="rounded-lg border bg-gray-100 px-3 py-2 w-full">Reset
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
