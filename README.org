@@ -33,13 +33,15 @@ The way I used HTMX for those 7 GUI tasks is not optimal, as each user interacti
 
 *** Timer HTMX solution
 
-It currently polls at just 100ms. Using 30ms looks a lot smoother, but kind of spams the hardware, so it is not used. I suppose WebSockets are implemented with HTMX, this wouldn't be an issue.
+It currently polls at just 100ms. Using 30ms looks a lot smoother, but kind of spams the hardware, so it is not used. If WebSockets are implemented with HTMX, this wouldn't be an issue, I think.
 
-With even smarter HTMX engineering, one could stop the 100ms refresh when the timer is finished and restart spamming the backend when the duration is changed or the Reset button hit.
+With even smarter HTMX engineering, one could stop the 100ms refresh when the timer is finished and restart polling/spamming the backend when the duration is changed or the Reset button hit.
 
 -----
 
-The Angular solution only uses one big =<table>= for its layout while the HTMX solution uses a =<form>= and has the duration and reset button UI elements outside the =<form>=, so clicking the Reset button is properly handled and not overriden by the 100ms update. Same with the duration =<input>=. The 100ms update would lead to one not being able to keep the mouse dragged since the element is replaced via HTMX.
+The Angular solution only uses one big =<table>= for its layout, while the HTMX solution uses a =<form>= and has the duration and reset button UI elements outside the =<form>=.
+
+This has to be done, so clicking the Reset button is properly handled and not overriden by the 100ms update. Same with the duration =<input>= where the 100ms update would replace the element and one couldn't adjust the duration by keeping the mouse clicked and dragged.
 
 * Java backend server for HTMX
 
