@@ -16,9 +16,8 @@
     <td>Duration:</td>
     <td>
       <input
-        (input)="updateDuration($event)"
+        [(ngModel)]="durationMs"
         [max]="maxTimeMs"
-        [value]="durationMs"
         min="0"
         name="duration"
         type="range"/>

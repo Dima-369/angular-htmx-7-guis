@@ -44,8 +44,4 @@ export class TimerComponent implements OnInit {
   reset(): void {
     this.elapsedMs = 0
   }
-
-  updateDuration($event: Event): void {
-    this.durationMs = parseInt(($event.target as HTMLInputElement).value);
-  }
 }
