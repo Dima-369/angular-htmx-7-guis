@@ -11,50 +11,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TimerController {
 
+    // store those 2 fields as strings as the defaultValue expects a string
+    private final static String defaultMaxTimeMs = "10000";
+    private final static String defaultDurationMs = "5000";
+
+    /**
+     * @return a string like "0.1s" rounded to 1 decimal place
+     */
     private static String formatElapsed(int elapsedMs) {
         double elapsedSeconds = (double) elapsedMs / 1000;
         return String.format("%.1fs", elapsedSeconds);
     }
 
-    // todo function to set models instead of copy/paste?
+    private static void updateModel(
+            Model model, int maxTimeMs, int durationMs, long diff, int elapsedMs,
+            long currentMs) {
+
+        model.addAttribute("maxTimeMs", maxTimeMs);
+        model.addAttribute("diff", diff);
+        model.addAttribute("durationMs", durationMs);
+        model.addAttribute("elapsedMs", Math.min(elapsedMs + diff, durationMs));
+        model.addAttribute("lastTimeMs", currentMs);
+        model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
+        model.addAttribute("elapsedFormatted", formatElapsed(elapsedMs));
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/timer-init")
+    public String timerInit(Model model) {
+        model.addAttribute("maxTimeMs", 10000);
+        model.addAttribute("durationMs", 5000);
+        return "timer-init";
+    }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/timer", method = {RequestMethod.GET, RequestMethod.POST})
     public String timer(
-            @RequestParam(value = "maxTimeMs", defaultValue = "10000") int maxTimeMs,
-            @RequestParam(value = "durationMs", defaultValue = "5000") int durationMs,
+            @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
+            @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
             @RequestParam(value = "elapsedMs", defaultValue = "0") int elapsedMs,
-            @RequestParam(value = "progressValueMs", defaultValue = "0") int progressValueMs,
+            @RequestParam(value = "lastTimeMs", defaultValue = "0") long lastTimeMs,
             Model model) {
 
-        // todo how to do the last timestamp calculation?
-        model.addAttribute("maxTimeMs", maxTimeMs);
-        model.addAttribute("durationMs", durationMs);
-        model.addAttribute("elapsedMs", elapsedMs);
-        model.addAttribute("progressValueMs", progressValueMs);
-        model.addAttribute("elapsedFormatted", formatElapsed(elapsedMs));
+        final long currentMs = System.currentTimeMillis();
+        long diff = 0;
+        if (lastTimeMs != 0) {
+            diff = currentMs - lastTimeMs;
+            if (diff <= 0) {
+                diff = 0;
+            }
+        }
+        updateModel(model, maxTimeMs, durationMs, diff, elapsedMs, currentMs);
         return "timer";
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/timer-reset", method = RequestMethod.POST)
     public String timerReset(
-            @RequestParam(value = "maxTimeMs", defaultValue = "10000") int maxTimeMs,
-            @RequestParam(value = "durationMs", defaultValue = "5000") int durationMs,
-            @RequestParam(value = "progressValueMs", defaultValue = "0") int progressValueMs,
+            @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
+            @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
             Model model) {
 
-        // todo how to do the last timestamp calculation?
-        model.addAttribute("maxTimeMs", maxTimeMs);
-        model.addAttribute("durationMs", durationMs);
-        model.addAttribute("progressValueMs", progressValueMs);
-
-        final int elapsedMs = 0;
-        model.addAttribute("elapsedMs", elapsedMs);
-        model.addAttribute("elapsedFormatted", formatElapsed(elapsedMs));
-
+        updateModel(model, maxTimeMs, durationMs, 0, 0, 0);
         return "timer";
     }
-
-    // todo how to do the reset button?
 }

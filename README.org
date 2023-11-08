@@ -1,5 +1,7 @@
 * Angular and HTMX solutions to 7 GUIs
 
+** Angular with Tailwind CSS
+
 Live Demo: https://angular-7-guis.netlify.app
 
 Funny note: If you have the Java backend server running under http://localhost:8083, the HTMX components in the Live Demo link above will also work!
@@ -7,6 +9,12 @@ Funny note: If you have the Java backend server running under http://localhost:8
 [[https://github.com/Dima-369/angular-htmx-7-guis/blob/master/screenshots/1.png?raw=true]]
 
 The 7 GUI tasks are detailed here: https://eugenkiss.github.io/7guis/tasks/
+
+Run via
+
+#+begin_src bash
+ng serve
+#+end_src
 
 ** Infos
 
@@ -21,9 +29,17 @@ In development, I develop the Angular version first to have the UI going and the
 </form>
 #+end_src
 
-HTMX is not optimal for the 7 GUI tasks, as each user interactions triggers a network call to the Java backend and returns HTML. The HTMX solutions are generally slower in the millisecond range compared to the pure Angular ones, but the delay is minimal, at least when the server is accessed through localhost.
+The way I used HTMX for those 7 GUI tasks is not optimal, as each user interactions triggers a network call to the Java backend and returns HTML. The HTMX solutions are generally slower in the millisecond range compared to the pure Angular ones, but the delay is minimal, at least when the server is accessed through localhost.
 
-Nevertheless, I personally find the pure HTMX solutions more enjoyable, as working with Java is fun!
+*** Timer HTMX solution
+
+It currently polls at just 100ms. Using 30ms looks a lot smoother, but kind of spams the hardware, so it is not used. I suppose WebSockets are implemented with HTMX, this wouldn't be an issue.
+
+With even smarter HTMX engineering, one could stop the 100ms refresh when the timer is finished and restart spamming the backend when the duration is changed or the Reset button hit.
+
+-----
+
+The Angular solution only uses one big =<table>= for its layout while the HTMX solution uses a =<form>= and has the duration and reset button UI elements outside the =<form>=, so clicking the Reset button is properly handled and not overriden by the 100ms update. Same with the duration =<input>=. The 100ms update would lead to one not being able to keep the mouse dragged since the element is replaced via HTMX.
 
 * Java backend server for HTMX
 
@@ -35,7 +51,7 @@ The backend uses Spring Boot 3.1.5, Java 17, Gradle and Thymeleaf 3.1.2 and star
 
 ** About Hot Reloading
 
-Apparently I was not able to configure Hot Reload with the backend server inside of Intellij Community Edition, so I coded this Emacs Lisp to setup file notifiers and then restart the server manually which works just as well.
+Apparently I was not able to configure Hot Reload with the backend server inside Intellij Community Edition, so I coded this Emacs Lisp to setup watchers on file changes and then restart the server manually which works just as well.
 
 #+begin_src emacs-lisp
 (defvar dima-spring-file-notifiers nil
@@ -75,6 +91,6 @@ Apparently I was not able to configure Hot Reload with the backend server inside
 
 * TODOs
 
-- finish all tasks (3.5 / 7 done) in Angular and HTMX
+- finish all tasks (4 / 7 done) in Angular and HTMX
 - add tests for the non HTMX Components
 - brush over DRY principal everywhere (stick to refactor when duplicated >= 3 times)

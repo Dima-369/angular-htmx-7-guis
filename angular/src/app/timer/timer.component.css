@@ -1,4 +1,0 @@
-progress::-moz-progress-bar,
-progress::-webkit-progress-value {
-  @apply bg-blue-500;
-}
