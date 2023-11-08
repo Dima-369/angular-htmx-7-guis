@@ -1,0 +1,48 @@
+<!--suppress XmlUnboundNsPrefix -->
+<input
+        name="maxTimeMs"
+        th:value="${progressValueMs}"
+        type="hidden">
+<input
+        name="elapsedTimeMs"
+        th:value="${elapsedTimeMs}"
+        type="hidden">
+
+<table>
+    <tbody>
+    <tr>
+        <td class="pr-2">Elapsed Time:</td>
+        <td>
+            <progress
+                    th:max="${maxTimeMs}"
+                    th:value="${progressValueMs}"
+                    class="w-full rounded-xl align-middle bg-gray-300"></progress>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="py-2" th:text="${elapsedFormatted}"></td>
+    </tr>
+    <tr>
+        <td>Duration:</td>
+        <td>
+            <!--suppress HtmlFormInputWithoutLabel -->
+            <input
+                    th:max="${maxTimeMs}"
+                    th:value="${durationMs}"
+                    min="0"
+                    name="duration"
+                    type="range"/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button
+                    hx-post="http://localhost:8083/timer-reset"
+                    hx-target="#form-timer"
+                    hx-trigger="click"
+                    class="rounded-lg border bg-gray-100 px-3 py-2 w-full">Reset
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
