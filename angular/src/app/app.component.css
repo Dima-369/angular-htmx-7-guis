@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a {
+  @apply mb-3 text-center text-2xl font-bold text-purple-600;
+}
+
+h3 {
+  @apply font-bold text-gray-700 mb-3;
+}
+
+.solutions > div {
+  @apply mx-6 w-full md:m-auto md:w-9/12 lg:m-auto lg:w-9/12 xl:w-5/12 xl:m-auto;
+}
+
+hr {
+  @apply my-12 h-px w-full bg-gray-300;
+}

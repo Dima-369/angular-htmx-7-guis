@@ -1,6 +1,6 @@
 * Angular and HTMX solutions to 7 GUIs
 
-Live Demo: https://angular-7-guis.netlify.app/
+Live Demo: https://angular-7-guis.netlify.app
 
 Funny note: If you have the Java backend server running under http://localhost:8083, the HTMX components in the Live Demo link above will also work!
 

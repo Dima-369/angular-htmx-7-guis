@@ -1,60 +1,67 @@
-<div class="mb-9 flex flex-col bg-gradient-to-r from-purple-500 to-pink-500 p-6">
-  <h1 class="mb-3 text-center text-4xl text-white">7 GUIs</h1>
-  <a href="https://eugenkiss.github.io/7guis/tasks/" target="_blank"
-     class="mx-auto text-center text-white underline">
-    https://eugenkiss.github.io/7guis/tasks
-  </a>
-</div>
-<div>
-  <div class="mx-6 w-full md:m-auto md:w-9/12 lg:m-auto lg:w-9/12 xl:5-12 xl:m-auto">
+<app-header></app-header>
+
+<div class="solutions">
+  <div>
     <a href="https://eugenkiss.github.io/7guis/tasks/#counter"
-       target="_blank"
-       class="mb-3 text-center text-2xl font-bold text-purple-600">Counter</a>
+       target="_blank">Counter</a>
     <div class="my-9 flex">
       <div>
-        <h1 class="font-bold text-gray-700 mb-3">Pure Angular</h1>
+        <h3>Pure Angular</h3>
         <app-counter></app-counter>
       </div>
       <div class="ml-20">
-        <h1 class="font-bold text-gray-700 mb-3">HTMX</h1>
+        <h3>HTMX</h3>
         <app-counter-htmx></app-counter-htmx>
       </div>
     </div>
   </div>
 
-  <div class="my-12 h-px w-full bg-gray-300"></div>
+  <hr>
 
-  <div class="mx-6 w-full md:m-auto md:w-9/12 lg:m-auto lg:w-9/12 xl:5-12 xl:m-auto">
+  <div>
     <a href="https://eugenkiss.github.io/7guis/tasks/#temp"
-       target="_blank"
-       class="mb-3 text-center text-2xl font-bold text-purple-600">Temperature Converter</a>
-    <div class="my-9" >
-      <h1 class="font-bold text-gray-700 mb-3">Pure Angular</h1>
+       target="_blank">Temperature Converter</a>
+    <div class="my-9">
+      <h3>Pure Angular</h3>
       <app-temperature-converter></app-temperature-converter>
-      <h1 class="font-bold text-gray-700 mb-3 mt-6">HTMX</h1>
+      <h3 class="mt-6">HTMX</h3>
       <app-temperature-converter-htmx></app-temperature-converter-htmx>
     </div>
   </div>
 
-  <div class="my-12 h-px w-full bg-gray-300"></div>
+  <hr>
 
-  <div class="mx-6 w-full md:m-auto md:w-9/12 lg:m-auto lg:w-9/12 xl:5-12 xl:m-auto">
+  <div>
     <a href="https://eugenkiss.github.io/7guis/tasks/#flight"
-       target="_blank"
-       class="mb-3 text-center text-2xl font-bold text-purple-600">Flight Booker</a>
+       target="_blank">Flight Booker</a>
     <div class="my-9 flex">
       <div>
-        <h1 class="font-bold text-gray-700 mb-3">Pure Angular</h1>
+        <h3>Pure Angular</h3>
         <app-flight-booker></app-flight-booker>
       </div>
       <div class="ml-20">
-        <h1 class="font-bold text-gray-700 mb-3">HTMX</h1>
+        <h3>HTMX</h3>
         <app-flight-booker-htmx></app-flight-booker-htmx>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <app-info></app-info>
+
+  <hr>
+
+  <div>
+    <a href="https://eugenkiss.github.io/7guis/tasks/#timer"
+       target="_blank">Timer</a>
+    <div class="my-9 flex">
+      <div>
+        <h3>Pure Angular</h3>
+        <app-timer></app-timer>
+      </div>
+      <div class="ml-20">
+        <h3>HTMX</h3>
+        <app-timer-htmx></app-timer-htmx>
+      </div>
+    </div>
+  </div>
 </div>
 
+<app-info></app-info>
