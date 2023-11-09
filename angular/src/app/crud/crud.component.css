@@ -3,10 +3,10 @@ button {
 }
 
 input {
-  @apply border ml-2 w-36;
+  @apply border ml-2 w-36 p-0.5;
 }
 
-#div-names p:focus {
+#div-names p.selected {
   @apply text-white bg-blue-500;
 }
 

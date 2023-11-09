@@ -20,13 +20,10 @@ cd angular && ng serve
 
 Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083 - but if it is not running, that's fine as well; the pure Angular components will still work just fine.
 
-In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution over there. The HTMX is initiated like this, for example in =src/app/flight-booker-htmx/flight-booker-htmx.component.html=:
+In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution over there. HTMX is always initiated in this way so that the Angular code has the least information about how the backend's innards do the work.
 
 #+begin_src html
-<form class="flex items-center" id="div-flight-booker"
-      hx-get="http://localhost:8083/flight-booker-update"
-      hx-trigger="load">
-</form>
+<div hx-get="http://localhost:8083/timer-init" hx-trigger="load"></div>
 #+end_src
 
 The way I used HTMX for those 7 GUI tasks is not optimal, as each user interactions triggers a network call to the Java backend and returns HTML. The HTMX solutions are generally slower in the millisecond range compared to the pure Angular ones, but the delay is minimal, at least when the server is accessed through localhost.

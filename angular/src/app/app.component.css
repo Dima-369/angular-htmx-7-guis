@@ -7,7 +7,7 @@ a {
 }
 
 h3 {
-  @apply font-bold text-gray-700 mb-3;
+  @apply font-bold text-gray-700 mb-6;
 }
 
 .solutions > div {
