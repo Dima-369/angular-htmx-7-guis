@@ -15,7 +15,7 @@
         th:value="${lastTimeMs}"
         type="hidden">
 
-<div th:if="${updateTimer}" style="width: 16px; height: 16px; background-color: red">
+<div th:if="${updateTimer}">
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
             hx-include="[name='durationMs']"
@@ -23,13 +23,6 @@
             hx-target="#form-timer-infinite"
             hx-trigger="every 100ms"
             id="input-timer-infinite"
-            type="hidden">
-</div>
-<div th:unless="${updateTimer}" style="width: 16px; height: 16px; background-color: blue">
-    <input
-            name="timerStopped"
-            id="timer-infinite-stopped"
-            value="1"
             type="hidden">
 </div>
 
