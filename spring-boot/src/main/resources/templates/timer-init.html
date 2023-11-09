@@ -1,10 +1,12 @@
 <!--suppress XmlUnboundNsPrefix -->
 
-<form
-        id="form-timer"
-        hx-post="http://localhost:8083/timer"
-        hx-include="[name='durationMs']"
-        hx-trigger="load, every 100ms">
+<form id="form-timer">
+    <input
+            type="hidden"
+            hx-post="http://localhost:8083/timer"
+            hx-include="[name='durationMs']"
+            hx-target="#form-timer"
+            hx-trigger="load">
 </form>
 
 <div class="flex">
@@ -14,9 +16,10 @@
     <input
             th:max="${maxTimeMs}"
             th:value="${durationMs}"
-            hx-get="http://localhost:8083/nope"
+            hx-post="http://localhost:8083/timer"
             hx-trigger="input"
             hx-sync="#form-timer:abort"
+            hx-include="[name='maxTimeMs'],[name='durationMs']"
             style="width: 200px; align-self: start"
             id="timer-duration"
             min="0"

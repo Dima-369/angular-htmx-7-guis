@@ -1,6 +1,14 @@
 <!--suppress XmlUnboundNsPrefix -->
 
 <input
+        type="hidden"
+        th:if="${updateTimer}"
+        hx-post="http://localhost:8083/timer"
+        hx-include="[name='durationMs']"
+        hx-target="#form-timer"
+        hx-trigger="every 100ms">
+
+<input
         name="maxTimeMs"
         id="timer-input-max-time-ms"
         th:value="${maxTimeMs}"

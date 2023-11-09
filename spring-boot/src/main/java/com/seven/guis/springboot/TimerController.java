@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TimerController {
 
-    // store those 2 fields as strings as the defaultValue expects a string
+    // store those 2 fields as strings as defaultValue for @RequestParam expects a string
     private final static String defaultMaxTimeMs = "10000";
     private final static String defaultDurationMs = "5000";
 
@@ -27,12 +27,16 @@ public class TimerController {
             Model model, int maxTimeMs, int durationMs, long diff, int elapsedMs,
             long currentMs) {
 
+        final float newProgressValueMs = (((float) elapsedMs) / durationMs) * maxTimeMs;
+        final boolean needsTimerUpdates = (int)newProgressValueMs != maxTimeMs;
+        model.addAttribute("updateTimer", needsTimerUpdates);
+        System.out.println((int)newProgressValueMs != maxTimeMs);
+
         model.addAttribute("maxTimeMs", maxTimeMs);
-        model.addAttribute("diff", diff);
         model.addAttribute("durationMs", durationMs);
-        model.addAttribute("elapsedMs", Math.min(elapsedMs + diff, durationMs));
-        model.addAttribute("lastTimeMs", currentMs);
-        model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
+        model.addAttribute("elapsedMs", needsTimerUpdates ? Math.min(elapsedMs + diff, durationMs) : 0);
+        model.addAttribute("lastTimeMs", needsTimerUpdates ? currentMs : 0);
+        model.addAttribute("progressValueMs", newProgressValueMs);
         model.addAttribute("elapsedFormatted", formatElapsed(elapsedMs));
     }
 

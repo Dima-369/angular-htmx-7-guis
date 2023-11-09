@@ -13,7 +13,7 @@ The 7 GUI tasks are detailed here: https://eugenkiss.github.io/7guis/tasks/
 Run via
 
 #+begin_src bash
-ng serve
+cd angular && ng serve
 #+end_src
 
 ** Infos
@@ -48,7 +48,7 @@ This has to be done, so clicking the Reset button is properly handled and not ov
 The backend uses Spring Boot 3.1.5, Java 17, Gradle and Thymeleaf 3.1.2 and starts on port 8083 when launched.
 
 #+begin_src bash
-./gradlew bootRun
+cd spring-boot && ./gradlew bootRun
 #+end_src
 
 ** About Hot Reloading
