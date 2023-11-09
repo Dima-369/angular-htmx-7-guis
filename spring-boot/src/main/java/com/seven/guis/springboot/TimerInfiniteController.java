@@ -17,15 +17,28 @@ public class TimerInfiniteController {
 
     private static void updateModel(
             Model model, int maxTimeMs, int durationMs, long diff, int elapsedMs,
-            long currentMs) {
+            long currentMs, boolean triggerTimer) {
 
+        final long newElapsedMs = Math.min(elapsedMs + diff, durationMs);
         model.addAttribute("maxTimeMs", maxTimeMs);
         model.addAttribute("diff", diff);
         model.addAttribute("durationMs", durationMs);
-        model.addAttribute("elapsedMs", Math.min(elapsedMs + diff, durationMs));
+        model.addAttribute("elapsedMs", newElapsedMs);
         model.addAttribute("lastTimeMs", currentMs);
-        model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
         model.addAttribute("elapsedFormatted", TimerHelper.formatElapsedMs(elapsedMs));
+
+        if (triggerTimer && false) {
+            model.addAttribute("updateTimer", true);
+            model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
+        } else {
+            if (newElapsedMs == durationMs) {
+                model.addAttribute("updateTimer", false);
+                model.addAttribute("progressValueMs", maxTimeMs);
+            } else {
+                model.addAttribute("updateTimer", true);
+                model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
+            }
+        }
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -33,6 +46,7 @@ public class TimerInfiniteController {
     public String timerInit(Model model) {
         model.addAttribute("maxTimeMs", 10000);
         model.addAttribute("durationMs", 5000);
+        model.addAttribute("updateTimer", true);
         return "timer-infinite-init";
     }
 
@@ -43,8 +57,10 @@ public class TimerInfiniteController {
             @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
             @RequestParam(value = "elapsedMs", defaultValue = "0") int elapsedMs,
             @RequestParam(value = "lastTimeMs", defaultValue = "0") long lastTimeMs,
+            @RequestParam(value = "timerStopped", defaultValue = "0") String timerStopped,
             Model model) {
 
+        // todo handle timerStopped
         final long currentMs = System.currentTimeMillis();
         long diff = 0;
         if (lastTimeMs != 0) {
@@ -53,7 +69,28 @@ public class TimerInfiniteController {
                 diff = 0;
             }
         }
-        updateModel(model, maxTimeMs, durationMs, diff, elapsedMs, currentMs);
+        updateModel(model, maxTimeMs, durationMs, diff, elapsedMs, currentMs, timerStopped.equals("0"));
+        return "timer-infinite";
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/timer-infinite-touch", method = RequestMethod.POST)
+    public String timerTouch(
+            @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
+            @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
+            @RequestParam(value = "elapsedMs", defaultValue = "0") int elapsedMs,
+            @RequestParam(value = "lastTimeMs", defaultValue = "0") long lastTimeMs,
+            @RequestParam(value = "timerStopped", defaultValue = "0") String timerStopped,
+            Model model) {
+
+        model.addAttribute("maxTimeMs", maxTimeMs);
+        model.addAttribute("diff", 0);
+        model.addAttribute("durationMs", durationMs);
+        model.addAttribute("elapsedMs", elapsedMs);
+        model.addAttribute("lastTimeMs", System.currentTimeMillis());
+        model.addAttribute("elapsedFormatted", TimerHelper.formatElapsedMs(elapsedMs));
+        model.addAttribute("updateTimer", true);
+        model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
         return "timer-infinite";
     }
 
@@ -64,7 +101,7 @@ public class TimerInfiniteController {
             @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
             Model model) {
 
-        updateModel(model, maxTimeMs, durationMs, 0, 0, 0);
+        updateModel(model, maxTimeMs, durationMs, 0, 0, 0, true);
         return "timer-infinite";
     }
 }

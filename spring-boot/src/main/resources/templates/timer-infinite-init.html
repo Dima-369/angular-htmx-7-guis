@@ -1,9 +1,9 @@
 <!--suppress XmlUnboundNsPrefix -->
 <form
-        id="form-timer-infinite"
-        hx-post="http://localhost:8083/timer-infinite"
         hx-include="[name='durationMs']"
-        hx-trigger="load, every 100ms">
+        hx-post="http://localhost:8083/timer-infinite"
+        hx-trigger="load"
+        id="form-timer-infinite">
 </form>
 
 <div class="flex">
@@ -11,25 +11,26 @@
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
-            th:max="${maxTimeMs}"
-            th:value="${durationMs}"
-            hx-get="http://localhost:8083/nope"
-            hx-trigger="input"
+            hx-post="http://localhost:8083/timer-infinite-touch"
             hx-sync="#form-timer-infinite:abort"
-            style="width: 200px; align-self: start"
+            hx-target="#form-timer-infinite"
+            hx-trigger="input"
             id="timer-infinite-duration"
             min="0"
             name="durationMs"
+            style="width: 200px; align-self: start"
+            th:max="${maxTimeMs}"
+            th:value="${durationMs}"
             type="range"/>
 </div>
 
 <!-- place button outside the form since the click event listener will collide with the every ms calls -->
 <button
-        id="btn-timer-infinite-reset"
+        class="rounded-lg border bg-gray-100 px-3 py-2 w-full mt-2"
+        hx-include="[name='maxTimeMs'],[name='durationMs']"
         hx-post="http://localhost:8083/timer-infinite-reset"
         hx-target="#form-timer-infinite"
         hx-trigger="click"
-        hx-include="[name='maxTimeMs'],[name='durationMs']"
-        style="width: 321px"
-        class="rounded-lg border bg-gray-100 px-3 py-2 w-full mt-2">Reset
+        id="btn-timer-infinite-reset"
+        style="width: 321px">Reset
 </button>
