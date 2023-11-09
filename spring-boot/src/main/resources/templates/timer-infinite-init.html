@@ -1,6 +1,6 @@
 <!--suppress XmlUnboundNsPrefix -->
 <form
-        id="form-timer"
+        id="form-timer-infinite"
         hx-post="http://localhost:8083/timer-infinite"
         hx-include="[name='durationMs']"
         hx-trigger="load, every 100ms">
@@ -15,9 +15,9 @@
             th:value="${durationMs}"
             hx-get="http://localhost:8083/nope"
             hx-trigger="input"
-            hx-sync="#form-timer:abort"
+            hx-sync="#form-timer-infinite:abort"
             style="width: 200px; align-self: start"
-            id="timer-duration"
+            id="timer-infinite-duration"
             min="0"
             name="durationMs"
             type="range"/>
@@ -25,9 +25,9 @@
 
 <!-- place button outside the form since the click event listener will collide with the every ms calls -->
 <button
-        id="btn-timer-reset"
+        id="btn-timer-infinite-reset"
         hx-post="http://localhost:8083/timer-infinite-reset"
-        hx-target="#form-timer"
+        hx-target="#form-timer-infinite"
         hx-trigger="click"
         hx-include="[name='maxTimeMs'],[name='durationMs']"
         style="width: 321px"
