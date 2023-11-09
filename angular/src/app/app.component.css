@@ -11,7 +11,7 @@ h3 {
 }
 
 .solutions > div {
-  @apply mx-6 w-full md:m-auto md:w-9/12 lg:m-auto lg:w-9/12 xl:w-5/12 xl:m-auto;
+  @apply px-6 w-full md:mx-auto md:w-11/12 lg:w-9/12 xl:w-5/12;
 }
 
 hr {

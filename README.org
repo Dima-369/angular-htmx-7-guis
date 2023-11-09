@@ -37,6 +37,8 @@ It currently polls at just 100ms. Using 30ms looks a lot smoother, but kind of s
 
 With even smarter HTMX engineering, one could stop the 100ms refresh when the timer is finished and restart polling/spamming the backend when the duration is changed or the Reset button hit.
 
+I am currently implementing this, and show both approaches here.
+
 -----
 
 The Angular solution only uses one big =<table>= for its layout, while the HTMX solution uses a =<form>= and has the duration and reset button UI elements outside the =<form>=.

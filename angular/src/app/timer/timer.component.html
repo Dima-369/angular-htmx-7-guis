@@ -1,35 +1,25 @@
-<table>
-  <tbody>
-  <tr>
-    <td class="pr-2">Elapsed Time:</td>
-    <td>
-      <progress
-        [max]="maxTimeMs"
-        [value]="progressValueMs"
-        class="w-full rounded-xl align-middle bg-gray-300"></progress>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="py-2">{{ formatElapsed() }}</td>
-  </tr>
-  <tr>
-    <td>Duration:</td>
-    <td>
-      <input
-        [(ngModel)]="durationMs"
-        [max]="maxTimeMs"
-        min="0"
-        name="duration"
-        type="range"/>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <button
-        (click)="reset()"
-        class="rounded-lg border bg-gray-100 px-3 py-2 w-full">Reset
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="flex">
+  <span class="pr-2" style="min-width: 120px">Elapsed Time:</span>
+  <progress
+    [max]="maxTimeMs"
+    [value]="progressValueMs"
+    class="h-4 self-center rounded-xl bg-gray-300 align-middle w-[200px]"></progress>
+</div>
+
+<p class="py-2">{{ formatElapsed() }}</p>
+
+<div class="flex">
+  <span class="w-[120px]">Duration: </span>
+  <input
+    class="self-start w-[200px]"
+    [(ngModel)]="durationMs"
+    [max]="maxTimeMs"
+    min="0"
+    name="duration"
+    type="range"/>
+</div>
+
+<button
+  (click)="reset()"
+  class="mt-2 rounded-lg border bg-gray-100 px-3 py-2 w-[321px] md:w-full">Reset
+</button>
