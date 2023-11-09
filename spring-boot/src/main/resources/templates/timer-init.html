@@ -1,45 +1,37 @@
 <!--suppress XmlUnboundNsPrefix -->
+<form
+        hx-include="[name='durationMs']"
+        hx-post="http://localhost:8083/timer"
+        hx-trigger="load"
+        id="form-timer">
+</form>
 
-<div id="form-all">
-    <form id="form-timer">
-        <input
-                hx-include="[name='durationMs']"
-                hx-post="http://localhost:8083/timer"
-                hx-target="#form-timer"
-                hx-trigger="load"
-                type="hidden">
-        <!-- add hidden for hx-sync -->
-        <input
-                id="input-timer-updater"
-                type="hidden">
-    </form>
+<div class="flex">
+    <span style="min-width: 120px">Duration:</span>
 
-    <div class="flex">
-        <span style="min-width: 120px">Duration:</span>
-
-        <!--suppress HtmlFormInputWithoutLabel -->
-        <input
-                hx-include="[name='maxTimeMs'],[name='durationMs'],[name='tick']"
-                hx-post="http://localhost:8083/timer"
-                hx-sync="#input-timer-updater:abort"
-                hx-trigger="change"
-                id="timer-duration"
-                min="0"
-                name="durationMs"
-                style="width: 200px; align-self: start"
-                th:max="${maxTimeMs}"
-                th:value="${durationMs}"
-                type="range"/>
-    </div>
-
-    <!-- place button outside the form since the click event listener will collide with the every ms calls -->
-    <button
-            class="rounded-lg border bg-gray-100 px-3 py-2 w-full mt-2"
-            hx-include="[name='maxTimeMs'],[name='durationMs'],[name='tick']"
-            hx-post="http://localhost:8083/timer-reset"
-            hx-sync="#input-timer-updater:abort"
-            hx-target="#form-all"
-            hx-trigger="click"
-            id="btn-timer-reset">Reset
-    </button>
+    <!--suppress HtmlFormInputWithoutLabel -->
+    <input
+            hx-post="http://localhost:8083/timer-duration-adjust"
+            hx-sync="#form-timer:abort"
+            hx-target="#form-timer"
+            hx-trigger="input"
+            hx-include="[name='elapsedMs']"
+            id="timer-duration"
+            min="0"
+            name="durationMs"
+            style="width: 200px; align-self: start"
+            th:max="${maxTimeMs}"
+            th:value="${durationMs}"
+            type="range"/>
 </div>
+
+<!-- place button outside the form since the click event listener will collide with the every ms calls -->
+<button
+        class="rounded-lg border bg-gray-100 px-3 py-2 w-full mt-2"
+        hx-include="[name='maxTimeMs'],[name='durationMs']"
+        hx-post="http://localhost:8083/timer-reset"
+        hx-target="#form-timer"
+        hx-trigger="click"
+        id="btn-timer-reset"
+        style="width: 321px">Reset
+</button>

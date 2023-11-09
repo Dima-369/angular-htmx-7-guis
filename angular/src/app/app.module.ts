@@ -9,11 +9,10 @@ import {TemperatureConverterComponent} from './temperature-converter/temperature
 import {TemperatureConverterHtmxComponent} from './temperature-converter-htmx/temperature-converter-htmx.component';
 import {FlightBookerComponent} from './flight-booker/flight-booker.component';
 import {FormsModule} from "@angular/forms";
-import { FlightBookerHtmxComponent } from './flight-booker-htmx/flight-booker-htmx.component';
-import { TimerComponent } from './timer/timer.component';
-import { TimerInfiniteHtmxComponent } from './timer-infinite-htmx/timer-infinite-htmx.component';
-import { HeaderComponent } from './header/header.component';
-import { TimerHtmxComponent } from './timer-htmx/timer-htmx.component';
+import {FlightBookerHtmxComponent} from './flight-booker-htmx/flight-booker-htmx.component';
+import {TimerComponent} from './timer/timer.component';
+import {HeaderComponent} from './header/header.component';
+import {TimerHtmxComponent} from './timer-htmx/timer-htmx.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { TimerHtmxComponent } from './timer-htmx/timer-htmx.component';
     FlightBookerComponent,
     FlightBookerHtmxComponent,
     TimerComponent,
-    TimerInfiniteHtmxComponent,
     HeaderComponent,
     TimerHtmxComponent
   ],

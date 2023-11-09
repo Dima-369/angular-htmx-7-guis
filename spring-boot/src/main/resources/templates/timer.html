@@ -1,35 +1,37 @@
 <!--suppress XmlUnboundNsPrefix -->
-
-<div id="input-timer-updater">
-    <input
-            hx-include="[name='durationMs']"
-            hx-post="http://localhost:8083/timer"
-            hx-target="#form-timer"
-            hx-trigger="every 100ms"
-            th:if="${updateTimer}"
-            type="hidden">
-</div>
-
 <input
         name="maxTimeMs"
         id="timer-input-max-time-ms"
         th:value="${maxTimeMs}"
         type="hidden">
 <input
-        name="tick"
-        id="timer-input-tick"
-        th:value="${tick}"
+        name="elapsedMs"
+        id="timer-input-elapsed-ms"
+        th:value="${elapsedMs}"
         type="hidden">
+<input
+        name="lastTimeMs"
+        id="timer-input-last-time-ms"
+        th:value="${lastTimeMs}"
+        type="hidden">
+
+<div th:if="${updateTimer}">
+    <!--suppress HtmlFormInputWithoutLabel -->
+    <input
+            hx-include="[name='durationMs']"
+            hx-post="http://localhost:8083/timer"
+            hx-target="#form-timer"
+            hx-trigger="every 100ms"
+            id="input-timer"
+            type="hidden">
+</div>
 
 <div class="flex">
     <span class="pr-2" style="min-width: 120px">Elapsed Time:</span>
     <progress
-            class="w-full rounded-xl"
-            style="height: 16px; align-self: center; width: 200px"
             th:max="${maxTimeMs}"
-            th:value="${progressValueMs}"></progress>
+            th:value="${progressValueMs}"
+            class="w-full rounded-xl" style="height: 16px; align-self: center; width: 200px"></progress>
 </div>
 
 <p class="py-2" th:text="${elapsedFormatted}"></p>
-
-<p th:text="${updateTimer}"></p>

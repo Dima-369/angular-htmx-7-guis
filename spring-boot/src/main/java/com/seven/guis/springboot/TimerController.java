@@ -7,62 +7,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-
 @SuppressWarnings("unused")
 @Controller
 public class TimerController {
 
-    // store those 2 fields as strings as defaultValue for @RequestParam expects a string
+    // store those 2 fields as strings as the defaultValue expects a string
     private final static String defaultMaxTimeMs = "10000";
     private final static String defaultDurationMs = "5000";
 
-    private static String formatDouble(double num) {
-        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
-        otherSymbols.setDecimalSeparator('.');
-        DecimalFormat df = new DecimalFormat("0.0", otherSymbols);
-        return stripTwoTrailingZeros(df.format(num));
-    }
+    private static void updateModel(
+            Model model, int maxTimeMs, int durationMs, long diff, int elapsedMs, long currentMs) {
 
-    private static String stripTwoTrailingZeros(String formattedString) {
-        if (formattedString.endsWith(".0")) {
-            return formattedString.substring(0, formattedString.length() - 2);
-        }
-        return formattedString;
-    }
-
-    /**
-     * @return a string like "0.1s" rounded to 1 decimal place
-     */
-    private static String formatElapsed(int elapsedMs) {
-        double elapsedSeconds = (double) elapsedMs / 1000;
-        return String.format("%.1fs", elapsedSeconds);
-    }
-
-    private static void updateModel(Model model, int maxTimeMs, int durationMs, int tick) {
-        final int tickMs = tick * 100;
-        if (tickMs >= durationMs) {
-            model.addAttribute("progressValueMs", 10000);
-            model.addAttribute("updateTimer", false);
-        } else {
-            model.addAttribute("progressValueMs", ((float)tickMs / durationMs) * maxTimeMs);
-            model.addAttribute("updateTimer", true);
-        }
-
-//        final float newProgressValueMs = (((float) (tick * 100)) / durationMs) * maxTimeMs;
-//        final boolean needsTimerUpdates = (int)newProgressValueMs != maxTimeMs;
-//        model.addAttribute("updateTimer", needsTimerUpdates);
-//        model.addAttribute("updateTimer", true);
-        System.out.println("tick: " + tick + ", durationMs: " + durationMs + ", maxTimeMs" + maxTimeMs);
-
+        final long newElapsedMs = Math.min(elapsedMs + diff, durationMs);
         model.addAttribute("maxTimeMs", maxTimeMs);
         model.addAttribute("durationMs", durationMs);
-        model.addAttribute("elapsedMs", Math.min(tick * 100, durationMs));
-        model.addAttribute("tick", tick + 1);
+        model.addAttribute("elapsedMs", newElapsedMs);
+        model.addAttribute("lastTimeMs", currentMs);
+        model.addAttribute("elapsedFormatted", TimerHelper.formatElapsedMs(elapsedMs));
 
-        model.addAttribute("elapsedFormatted", formatElapsed(tick * 100));
+        if (newElapsedMs == durationMs) {
+            model.addAttribute("updateTimer", false);
+            model.addAttribute("progressValueMs", maxTimeMs);
+        } else {
+            model.addAttribute("updateTimer", true);
+            model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
+        }
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -70,6 +39,7 @@ public class TimerController {
     public String timerInit(Model model) {
         model.addAttribute("maxTimeMs", 10000);
         model.addAttribute("durationMs", 5000);
+        model.addAttribute("updateTimer", true);
         return "timer-init";
     }
 
@@ -78,11 +48,37 @@ public class TimerController {
     public String timer(
             @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
             @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
-            @RequestParam(value = "tick", defaultValue = "0") int tick,
+            @RequestParam(value = "elapsedMs", defaultValue = "0") int elapsedMs,
+            @RequestParam(value = "lastTimeMs", defaultValue = "0") long lastTimeMs,
             Model model) {
 
-        // todo dynamic tick value
-        updateModel(model, maxTimeMs, durationMs, tick);
+        final long currentMs = System.currentTimeMillis();
+        long diff = 0;
+        if (lastTimeMs != 0) {
+            diff = currentMs - lastTimeMs;
+            if (diff <= 0) {
+                diff = 0;
+            }
+        }
+        updateModel(model, maxTimeMs, durationMs, diff, elapsedMs, currentMs);
+        return "timer";
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/timer-duration-adjust", method = RequestMethod.POST)
+    public String timerTouch(
+            @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
+            @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
+            @RequestParam(value = "elapsedMs", defaultValue = "0") int elapsedMs,
+            Model model) {
+
+        model.addAttribute("maxTimeMs", maxTimeMs);
+        model.addAttribute("durationMs", durationMs);
+        model.addAttribute("elapsedMs", elapsedMs);
+        model.addAttribute("lastTimeMs", System.currentTimeMillis());
+        model.addAttribute("elapsedFormatted", TimerHelper.formatElapsedMs(elapsedMs));
+        model.addAttribute("updateTimer", true);
+        model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
         return "timer";
     }
 
@@ -91,10 +87,9 @@ public class TimerController {
     public String timerReset(
             @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
             @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
-            @RequestParam(value = "tick", defaultValue = "0") int tick,
             Model model) {
 
-        updateModel(model, maxTimeMs, durationMs, 0);
+        updateModel(model, maxTimeMs, durationMs, 0, 0, 0);
         return "timer";
     }
 }
