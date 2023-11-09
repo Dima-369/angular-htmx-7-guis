@@ -27,6 +27,7 @@ export class TimerComponent implements OnInit {
 
   updateOnAnimationFrame(timestamp: DOMHighResTimeStamp): void {
     this.elapsedMs = Math.min(this.elapsedMs + (timestamp - this.lastTimestamp), this.durationMs);
+    // avoid division by 0
     if (this.durationMs === 0) {
       this.progressValueMs = this.maxTimeMs;
     } else {
