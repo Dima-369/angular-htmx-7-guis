@@ -35,7 +35,7 @@ The way I used HTMX for those 7 GUI tasks is not optimal, as each user interacti
 
 It currently polls at just 100ms. Using 30ms looks a lot smoother, but kind of spams the hardware, so it is not used. If WebSockets are implemented with HTMX, this wouldn't be an issue, I think.
 
-I spend way too much time making sure that the HTMX API calls are only fired when the timer is running, but it works incredibly well in the end.
+I spend way too much time making sure that the HTMX API calls are only fired when the timer is running, and that they are stopped when the timer has reached its duration. In the user interface, this isn't even noticeable.
 
 * Java backend server for HTMX
 
