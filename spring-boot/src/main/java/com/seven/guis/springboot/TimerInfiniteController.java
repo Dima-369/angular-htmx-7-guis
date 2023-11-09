@@ -15,14 +15,6 @@ public class TimerInfiniteController {
     private final static String defaultMaxTimeMs = "10000";
     private final static String defaultDurationMs = "5000";
 
-    /**
-     * @return a string like "0.1s" rounded to 1 decimal place
-     */
-    private static String formatElapsed(int elapsedMs) {
-        double elapsedSeconds = (double) elapsedMs / 1000;
-        return String.format("%.1fs", elapsedSeconds);
-    }
-
     private static void updateModel(
             Model model, int maxTimeMs, int durationMs, long diff, int elapsedMs,
             long currentMs) {
@@ -33,7 +25,7 @@ public class TimerInfiniteController {
         model.addAttribute("elapsedMs", Math.min(elapsedMs + diff, durationMs));
         model.addAttribute("lastTimeMs", currentMs);
         model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
-        model.addAttribute("elapsedFormatted", formatElapsed(elapsedMs));
+        model.addAttribute("elapsedFormatted", TimerHelper.formatElapsedMs(elapsedMs));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

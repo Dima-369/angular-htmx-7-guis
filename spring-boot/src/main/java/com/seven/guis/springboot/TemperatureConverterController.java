@@ -14,20 +14,6 @@ import java.util.Locale;
 @Controller
 public class TemperatureConverterController {
 
-    private static String formatDouble(double num) {
-        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
-        otherSymbols.setDecimalSeparator('.');
-        DecimalFormat df = new DecimalFormat("0.00", otherSymbols);
-        return stripTrailingZeros(df.format(num));
-    }
-
-    private static String stripTrailingZeros(String formattedString) {
-        if (formattedString.endsWith(".00")) {
-            return formattedString.substring(0, formattedString.length() - 3);
-        }
-        return formattedString;
-    }
-
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/temperature-converter-init")
     public String init(Model model) {
@@ -48,5 +34,19 @@ public class TemperatureConverterController {
         final double newCelsius = (fahrenheit - 32) * (5 / 9.0);
         model.addAttribute("celsius", formatDouble(newCelsius));
         return "temperature-converter-celsius";
+    }
+
+    private static String formatDouble(double num) {
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("0.00", otherSymbols);
+        return stripTwoTrailingZeros(df.format(num));
+    }
+
+    private static String stripTwoTrailingZeros(String formattedString) {
+        if (formattedString.endsWith(".00")) {
+            return formattedString.substring(0, formattedString.length() - 3);
+        }
+        return formattedString;
     }
 }

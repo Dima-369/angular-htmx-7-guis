@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 @SuppressWarnings("unused")
 @Controller
 public class TimerController {
@@ -14,6 +18,20 @@ public class TimerController {
     // store those 2 fields as strings as defaultValue for @RequestParam expects a string
     private final static String defaultMaxTimeMs = "10000";
     private final static String defaultDurationMs = "5000";
+
+    private static String formatDouble(double num) {
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.US);
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("0.0", otherSymbols);
+        return stripTwoTrailingZeros(df.format(num));
+    }
+
+    private static String stripTwoTrailingZeros(String formattedString) {
+        if (formattedString.endsWith(".0")) {
+            return formattedString.substring(0, formattedString.length() - 2);
+        }
+        return formattedString;
+    }
 
     /**
      * @return a string like "0.1s" rounded to 1 decimal place
