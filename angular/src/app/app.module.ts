@@ -13,6 +13,7 @@ import {FlightBookerHtmxComponent} from './flight-booker-htmx/flight-booker-htmx
 import {TimerComponent} from './timer/timer.component';
 import {HeaderComponent} from './header/header.component';
 import {TimerHtmxComponent} from './timer-htmx/timer-htmx.component';
+import { CrudComponent } from './crud/crud.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {TimerHtmxComponent} from './timer-htmx/timer-htmx.component';
     FlightBookerHtmxComponent,
     TimerComponent,
     HeaderComponent,
-    TimerHtmxComponent
+    TimerHtmxComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule,

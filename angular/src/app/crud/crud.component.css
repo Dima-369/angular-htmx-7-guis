@@ -1,0 +1,15 @@
+button {
+  @apply rounded-lg border bg-gray-100 px-3 py-2;
+}
+
+input {
+  @apply border ml-2 w-36;
+}
+
+#div-names p:focus {
+  @apply text-white bg-blue-500;
+}
+
+#div-names p {
+  @apply p-1 select-none cursor-pointer;
+}

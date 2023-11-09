@@ -1,0 +1,35 @@
+<table>
+  <tr>
+    <td class="pb-2">Filter prefix:</td>
+    <td class="pb-2">
+      <input type="text" [(ngModel)]="filter">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="3">
+      <div id="div-names" class="min-h-[150px] border">
+        <p tabindex="0" class="p-1">Emil, Hans</p>
+        <p tabindex="0">Mustermann, Max</p>
+        <p tabindex="0">Tisch, Roman</p>
+      </div>
+    </td>
+    <td class="pl-3 align-top">
+      <div class="flex">
+        <span class="w-24">Name:</span>
+        <input type="text" [(ngModel)]="name">
+      </div>
+      <div class="flex mt-2">
+        <span class="w-24">Surname:</span>
+        <input type="text" [(ngModel)]="surname">
+      </div>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
+
+<div class="flex mt-3">
+  <button (click)="create()">Create</button>
+  <button (click)="update()" class="mx-6">Update</button>
+  <button (click)="delete()">Delete</button>
+</div>
