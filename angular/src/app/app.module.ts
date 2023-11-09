@@ -11,8 +11,9 @@ import {FlightBookerComponent} from './flight-booker/flight-booker.component';
 import {FormsModule} from "@angular/forms";
 import { FlightBookerHtmxComponent } from './flight-booker-htmx/flight-booker-htmx.component';
 import { TimerComponent } from './timer/timer.component';
-import { TimerInfiniteHtmxComponent } from './timer-htmx/timer-infinite-htmx.component';
+import { TimerInfiniteHtmxComponent } from './timer-infinite-htmx/timer-infinite-htmx.component';
 import { HeaderComponent } from './header/header.component';
+import { TimerHtmxComponent } from './timer-htmx/timer-htmx.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HeaderComponent } from './header/header.component';
     FlightBookerHtmxComponent,
     TimerComponent,
     TimerInfiniteHtmxComponent,
-    HeaderComponent
+    HeaderComponent,
+    TimerHtmxComponent
   ],
   imports: [
     BrowserModule,
