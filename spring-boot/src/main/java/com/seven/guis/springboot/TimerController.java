@@ -23,21 +23,28 @@ public class TimerController {
         return String.format("%.1fs", elapsedSeconds);
     }
 
-    private static void updateModel(
-            Model model, int maxTimeMs, int durationMs, long diff, int elapsedMs,
-            long currentMs) {
+    private static void updateModel(Model model, int maxTimeMs, int durationMs, int tick) {
+        final int tickMs = tick * 100;
+        if (tickMs >= durationMs) {
+            model.addAttribute("progressValueMs", 10000);
+            model.addAttribute("updateTimer", false);
+        } else {
+            model.addAttribute("progressValueMs", ((float)tickMs / durationMs) * maxTimeMs);
+            model.addAttribute("updateTimer", true);
+        }
 
-        final float newProgressValueMs = (((float) elapsedMs) / durationMs) * maxTimeMs;
-        final boolean needsTimerUpdates = (int)newProgressValueMs != maxTimeMs;
-        model.addAttribute("updateTimer", needsTimerUpdates);
-        System.out.println((int)newProgressValueMs != maxTimeMs);
+//        final float newProgressValueMs = (((float) (tick * 100)) / durationMs) * maxTimeMs;
+//        final boolean needsTimerUpdates = (int)newProgressValueMs != maxTimeMs;
+//        model.addAttribute("updateTimer", needsTimerUpdates);
+//        model.addAttribute("updateTimer", true);
+        System.out.println("tick: " + tick + ", durationMs: " + durationMs + ", maxTimeMs" + maxTimeMs);
 
         model.addAttribute("maxTimeMs", maxTimeMs);
         model.addAttribute("durationMs", durationMs);
-        model.addAttribute("elapsedMs", needsTimerUpdates ? Math.min(elapsedMs + diff, durationMs) : 0);
-        model.addAttribute("lastTimeMs", needsTimerUpdates ? currentMs : 0);
-        model.addAttribute("progressValueMs", newProgressValueMs);
-        model.addAttribute("elapsedFormatted", formatElapsed(elapsedMs));
+        model.addAttribute("elapsedMs", Math.min(tick * 100, durationMs));
+        model.addAttribute("tick", tick + 1);
+
+        model.addAttribute("elapsedFormatted", formatElapsed(tick * 100));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -53,19 +60,11 @@ public class TimerController {
     public String timer(
             @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
             @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
-            @RequestParam(value = "elapsedMs", defaultValue = "0") int elapsedMs,
-            @RequestParam(value = "lastTimeMs", defaultValue = "0") long lastTimeMs,
+            @RequestParam(value = "tick", defaultValue = "0") int tick,
             Model model) {
 
-        final long currentMs = System.currentTimeMillis();
-        long diff = 0;
-        if (lastTimeMs != 0) {
-            diff = currentMs - lastTimeMs;
-            if (diff <= 0) {
-                diff = 0;
-            }
-        }
-        updateModel(model, maxTimeMs, durationMs, diff, elapsedMs, currentMs);
+        // todo dynamic tick value
+        updateModel(model, maxTimeMs, durationMs, tick);
         return "timer";
     }
 
@@ -74,9 +73,10 @@ public class TimerController {
     public String timerReset(
             @RequestParam(value = "maxTimeMs", defaultValue = defaultMaxTimeMs) int maxTimeMs,
             @RequestParam(value = "durationMs", defaultValue = defaultDurationMs) int durationMs,
+            @RequestParam(value = "tick", defaultValue = "0") int tick,
             Model model) {
 
-        updateModel(model, maxTimeMs, durationMs, 0, 0, 0);
+        updateModel(model, maxTimeMs, durationMs, 0);
         return "timer";
     }
 }
