@@ -1,0 +1,75 @@
+<!--suppress XmlUnboundNsPrefix -->
+<form id="form-crud">
+
+    <table>
+        <tr>
+            <td class="pb-2">
+                <label for="filter">Filter prefix</label>
+            </td>
+            <td class="pb-2">
+                <input type="text" name="filter" id="filter">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="3">
+                <div
+                        class="border min-h-[150px]"
+                        hx-post="http://localhost:8083/crud-unset"
+                        hx-target="#form-crud"
+                        hx-trigger="click"
+                        id="div-names">
+
+                    <p
+                            th:each="entry: ${entries}"
+                            hx-post="http://localhost:8083/crud-click"
+                            hx-target="#form-crud"
+                            hx-trigger="click"
+<!--                            (click)="clickEntry(entry); $event.stopPropagation()"-->
+<!--                            *ngFor="let entry of getFilteredEntries()"-->
+<!--                            [ngClass]="{'selected': selectedEntry === entry}"-->
+                            tabindex="0">
+                        {{entry.name}}, {{entry.surname}}
+                    </p>
+                </div>
+            </td>
+            <td class="pl-3 align-top">
+                <div class="flex items-center">
+                    <label class="w-24" for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="mt-2 flex items-center">
+                    <label class="w-24" for="surname">Surname:</label>
+                    <input type="text" id="surname" name="surname">
+                </div>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+
+    <div class="mt-3 flex">
+        <button
+                hx-post="http://localhost:8083/crud-create"
+                hx-trigger="click"
+                hx-target="#form-crud"
+                class="rounded-lg border bg-gray-100 px-3 py-2;"
+        >Create
+        </button>
+
+        <button
+                th:disabled="${updateDisabled}"
+                hx-post="http://localhost:8083/crud-update"
+                hx-trigger="click"
+                hx-target="#form-crud"
+                class="mx-6 disabled:text-gray-300">Update
+        </button>
+
+        <button
+                th:disabled="${deleteDisabled}"
+                hx-post="http://localhost:8083/crud-delete"
+                hx-trigger="click"
+                hx-target="#form-crud"
+                class="mx-6 disabled:text-gray-300">Delete</button>
+    </div>
+
+</form>

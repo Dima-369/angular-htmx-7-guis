@@ -7,7 +7,7 @@ import java.util.Locale;
 public class TimerHelper {
 
     /**
-     * @return a string like "5.0s" or "4.9s"
+     * @return a string like "5.0s" or "4.9s" with a dot as the decimal separator.
      */
     public static String formatElapsedMs(int elapsedMs) {
         double elapsedSeconds = (double) elapsedMs / 1000;
