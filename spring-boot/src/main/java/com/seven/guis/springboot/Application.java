@@ -26,7 +26,7 @@ public class Application {
         if (deployOnRender == null) {
             baseUrl = "http://localhost:" + port + "/";
         } else {
-            baseUrl = "https://java-7-guis.onrender.com/:" + port + "/";
+            baseUrl = "https://java-7-guis.onrender.com/";
         }
 
         SpringApplication app = new SpringApplication(Application.class);
