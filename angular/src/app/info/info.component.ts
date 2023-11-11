@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import env from "../../assets/env.json";
 
 @Component({
   selector: 'app-info',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent {
-
+  url: string = env.serverUrl + "info"
 }

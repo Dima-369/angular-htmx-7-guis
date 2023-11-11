@@ -1,5 +1,9 @@
-<div hx-post="http://localhost:8083/info" hx-trigger="load" hx-target="#div-info" class="text-gray-400 mt-20 mb-10">
-  <div class="flex w-fit mx-auto" id="div-info">
+<div class="mt-20 mb-10 text-gray-400">
+  <div
+    [attr.hx-get]="url"
+    hx-trigger="load"
+    class="mx-auto flex w-fit"
+    id="div-info">
   <span class="text-gray-400">
     Spring Boot backend offline
   </span>
