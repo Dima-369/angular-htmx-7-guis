@@ -11,7 +11,14 @@ import java.util.Collections;
 public class Application {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Application.class);
-        app.setDefaultProperties(Collections.singletonMap("server.port", "10000"));
+
+        // check port environment since render.com expects port 10000 by default
+        String port = System.getenv("PORT");
+        if (port == null) {
+           port = "10000" ;
+        }
+        app.setDefaultProperties(Collections.singletonMap("server.port", port));
+
         app.run(args);
     }
 }
