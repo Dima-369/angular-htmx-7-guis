@@ -36,25 +36,27 @@ I spend way too much time making sure that the HTMX API calls are only fired whe
 
 * Java backend server for HTMX
 
-The backend uses Spring Boot 3.1.5, Java 17, Gradle and Thymeleaf 3.1.2 and starts on port 8083 when launched.
+The backend uses Spring Boot 3.1.5, Java 17, Gradle, Spring Web, Thymeleaf 3.1.2 and starts on port 8083 when launched. This was created via https://start.spring.io/
+
+It is deployed in the free tier on https://render.com and is accessible under https://java-7-guis.onrender.com/
+
+You can start it on localhost like this:
 
 #+begin_src bash
 cd spring-boot && ./gradlew bootRun
 #+end_src
-
-Created via https://start.spring.io/ with Thymeleaf and Spring Web.
 
 ** Dockerfile
 
 The Dockerfile is provided for deployment. Run it via:
 
 #+begin_src bash
-docker build --progress=plain -t 7guis . && docker run --publish 8083:8083 7guis
+docker build -t 7guis . && docker run --publish 8083:8083 7guis
 #+end_src
 
 ** About Hot Reloading
 
-Apparently I was not able to configure Hot Reload with the backend server inside Intellij Community Edition, so I coded this Emacs Lisp to setup watchers on file changes and then restart the server manually which works just as well.
+Apparently I was not able to configure Hot Reload on localhost with the backend server inside Intellij Community Edition, so I coded this Emacs Lisp to setup watchers on file changes and then restart the server manually which works just as well.
 
 #+begin_src emacs-lisp
 (defvar dima-spring-file-notifiers nil
@@ -94,6 +96,5 @@ Apparently I was not able to configure Hot Reload with the backend server inside
 
 * TODOs
 
-- finish all tasks (4 / 7 done) in Angular and HTMX
-- add tests for the non HTMX Components
-- brush over DRY principal everywhere (stick to refactor when duplicated >= 3 times)
+- finish all tasks (4.5 / 7 done) in Angular and HTMX
+- add tests for the non HTMX Components?
