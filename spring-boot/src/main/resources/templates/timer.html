@@ -1,17 +1,18 @@
 <!--suppress XmlUnboundNsPrefix -->
+
 <input
-        name="maxTimeMs"
         id="timer-input-max-time-ms"
+        name="maxTimeMs"
         th:value="${maxTimeMs}"
         type="hidden">
 <input
-        name="elapsedMs"
         id="timer-input-elapsed-ms"
+        name="elapsedMs"
         th:value="${elapsedMs}"
         type="hidden">
 <input
-        name="lastTimeMs"
         id="timer-input-last-time-ms"
+        name="lastTimeMs"
         th:value="${lastTimeMs}"
         type="hidden">
 
@@ -19,10 +20,10 @@
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
             hx-include="[name='durationMs']"
-            hx-post="http://localhost:8083/timer"
             hx-target="#form-timer"
             hx-trigger="every 100ms"
             id="input-timer"
+            th:hx-post="${url}"
             type="hidden">
 </div>
 

@@ -23,6 +23,7 @@ public class TimerController {
         model.addAttribute("durationMs", durationMs);
         model.addAttribute("elapsedMs", newElapsedMs);
         model.addAttribute("lastTimeMs", currentMs);
+        model.addAttribute("url", Application.baseUrl + "timer");
 
         // safeguard values since the 100ms poll stops the timer, and it can end on 4.9s
         if (newElapsedMs == durationMs) {
@@ -42,6 +43,9 @@ public class TimerController {
         model.addAttribute("maxTimeMs", 10000);
         model.addAttribute("durationMs", 5000);
         model.addAttribute("updateTimer", true);
+        model.addAttribute("urlReset", Application.baseUrl + "timer-reset");
+        model.addAttribute("urlDuration", Application.baseUrl + "timer-duration-adjust");
+        model.addAttribute("url", Application.baseUrl + "timer");
         return "timer-init";
     }
 
@@ -81,6 +85,7 @@ public class TimerController {
         model.addAttribute("elapsedFormatted", TimerHelper.formatElapsedMs(elapsedMs));
         model.addAttribute("updateTimer", true);
         model.addAttribute("progressValueMs", (((float) elapsedMs) / durationMs) * maxTimeMs);
+        model.addAttribute("url", Application.baseUrl + "timer");
         return "timer";
     }
 

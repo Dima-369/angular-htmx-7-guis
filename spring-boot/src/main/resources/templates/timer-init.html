@@ -1,9 +1,9 @@
 <!--suppress XmlUnboundNsPrefix -->
 <form
         hx-include="[name='durationMs']"
-        hx-post="http://localhost:8083/timer"
         hx-trigger="load"
-        id="form-timer">
+        id="form-timer"
+        th:hx-post="${url}">
 </form>
 
 <div class="flex">
@@ -11,15 +11,15 @@
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
-            hx-post="http://localhost:8083/timer-duration-adjust"
+            hx-include="[name='elapsedMs']"
             hx-sync="#form-timer:abort"
             hx-target="#form-timer"
             hx-trigger="input"
-            hx-include="[name='elapsedMs']"
             id="timer-duration"
             min="0"
             name="durationMs"
             style="width: 200px; align-self: start"
+            th:hx-post="${urlDuration}"
             th:max="${maxTimeMs}"
             th:value="${durationMs}"
             type="range"/>
@@ -29,9 +29,10 @@
 <button
         class="rounded-lg border bg-gray-100 px-3 py-2 w-full mt-2"
         hx-include="[name='maxTimeMs'],[name='durationMs']"
-        hx-post="http://localhost:8083/timer-reset"
         hx-target="#form-timer"
         hx-trigger="click"
         id="btn-timer-reset"
-        style="width: 321px">Reset
+        style="width: 321px"
+        th:hx-post="${urlReset}">
+    Reset
 </button>
