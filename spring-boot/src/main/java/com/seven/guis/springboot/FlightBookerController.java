@@ -56,6 +56,8 @@ public class FlightBookerController {
         model.addAttribute("to", to);
         model.addAttribute("toDisabled", type.equals("one-way"));
         model.addAttribute("bookDisabled", bookDisabled);
+        model.addAttribute("url", Application.baseUrl + "flight-booker-update");
+        model.addAttribute("urlBook", Application.baseUrl + "flight-booker-book");
         return "flight-booker";
     }
 

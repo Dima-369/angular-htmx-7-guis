@@ -1,13 +1,15 @@
+<!--suppress XmlUnboundNsPrefix -->
+
 <div class="flex max-w-xs flex-col" id="div-flight-booker">
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <select
             class="p-2"
-            hx-post="http://localhost:8083/flight-booker-update"
             hx-target="#div-flight-booker"
             hx-trigger="change"
             id="select-flight-booker-type"
-            name="type">
+            name="type"
+            th:hx-post="${url}">
         <option value="one-way" th:selected="${oneWay}">
             one-way flight
         </option>
@@ -19,20 +21,19 @@
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
             class="my-2 border p-1 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400"
-            hx-post="http://localhost:8083/flight-booker-update"
             hx-target="#div-flight-booker"
             hx-trigger="input"
             id="input-flight-booker-from"
             name="from"
             placeholder="27.03.2014"
             th:classappend="${fromValid} ? null : 'bg-red-400'"
+            th:hx-post="${url}"
             th:value="${from}"
             type="text">
 
     <!--suppress HtmlFormInputWithoutLabel -->
     <input
             class="mb-2 border p-1 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400"
-            hx-post="http://localhost:8083/flight-booker-update"
             hx-target="#div-flight-booker"
             hx-trigger="input"
             id="input-flight-booker-to"
@@ -40,15 +41,16 @@
             placeholder="27.03.2014"
             th:classappend="${toValid} ? null : 'bg-red-400'"
             th:disabled="${toDisabled}"
+            th:hx-post="${url}"
             th:value="${to}"
             type="text">
 
     <button
             class="rounded-lg border bg-gray-100 px-3 py-2 text-black disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-400"
-            hx-post="http://localhost:8083/flight-booker-book"
             hx-swap="afterend"
             hx-trigger="click"
-            th:disabled="${bookDisabled}">
+            th:disabled="${bookDisabled}"
+            th:hx-post="${urlBook}">
         Book
     </button>
 </div>
