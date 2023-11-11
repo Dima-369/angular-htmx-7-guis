@@ -9,16 +9,28 @@ import java.util.Collections;
 @SpringBootApplication
 @RestController
 public class Application {
-    public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(Application.class);
 
+    /**
+     * Ending in /. Setup in main() with the port.
+     */
+    public static String baseUrl;
+
+    public static void main(String[] args) {
         // check port environment since render.com expects port 10000 by default
         String port = System.getenv("PORT");
         if (port == null) {
-           port = "10000" ;
+            port = "10000";
         }
-        app.setDefaultProperties(Collections.singletonMap("server.port", port));
 
+        String deployOnRender = System.getenv("DEPLOY_ON_RENDER");
+        if (deployOnRender == null) {
+            baseUrl = "http://localhost:" + port + "/";
+        } else {
+            baseUrl = "https://java-7-guis.onrender.com/:" + port + "/";
+        }
+
+        SpringApplication app = new SpringApplication(Application.class);
+        app.setDefaultProperties(Collections.singletonMap("server.port", port));
         app.run(args);
     }
 }

@@ -15,6 +15,7 @@ public class CounterController {
     @RequestMapping(value = "/counter", method = {RequestMethod.GET, RequestMethod.POST})
     public String counter(@RequestParam(value = "counter", defaultValue = "-1") int counter, Model model) {
         model.addAttribute("counter", counter + 1);
+        model.addAttribute("url", Application.baseUrl + "counter");
         return "counter";
     }
 }

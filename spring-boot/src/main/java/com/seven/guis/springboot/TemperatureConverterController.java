@@ -17,6 +17,8 @@ public class TemperatureConverterController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/temperature-converter-init")
     public String init(Model model) {
+        model.addAttribute("urlCelsius",  Application.baseUrl + "temperature-converter-from-celsius");
+        model.addAttribute("urlFahrenheit",  Application.baseUrl + "temperature-converter-from-fahrenheit");
         return "temperature-converter-init";
     }
 
@@ -25,6 +27,7 @@ public class TemperatureConverterController {
     public String fromCelsius(@RequestParam(value = "celsius") float celsius, Model model) {
         final double newFahrenheit = (celsius * (9.0 / 5) + 32);
         model.addAttribute("fahrenheit", formatDouble(newFahrenheit));
+        model.addAttribute("url",  Application.baseUrl + "temperature-converter-from-fahrenheit");
         return "temperature-converter-fahrenheit";
     }
 
@@ -33,6 +36,7 @@ public class TemperatureConverterController {
     public String fromFahrenheit(@RequestParam(value = "fahrenheit") float fahrenheit, Model model) {
         final double newCelsius = (fahrenheit - 32) * (5 / 9.0);
         model.addAttribute("celsius", formatDouble(newCelsius));
+        model.addAttribute("url",  Application.baseUrl + "temperature-converter-from-celsius");
         return "temperature-converter-celsius";
     }
 
