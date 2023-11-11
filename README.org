@@ -4,7 +4,7 @@
 
 Live Demo: https://angular-7-guis.netlify.app
 
-Funny note: If you have the Java backend server running under http://localhost:8083, the HTMX components in the Live Demo link above will also work!
+Funny note: If you have the Java backend server running under http://localhost:10000, the HTMX components in the Live Demo link above will also work!
 
 [[https://github.com/Dima-369/angular-htmx-7-guis/blob/master/screenshots/1.png?raw=true]]
 
@@ -18,12 +18,12 @@ cd angular && ng serve
 
 ** Infos
 
-Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:8083 - but if it is not running, that's fine as well; the pure Angular components will still work just fine.
+Note that the Angular code assumes that the Java Sprint Boot server runs at http://localhost:10000 - but if it is not running, that's fine as well; the pure Angular components will still work just fine.
 
 In development, I develop the Angular version first to have the UI going and then I jump into =Intellij= and code the entire backend solution over there. HTMX is always initiated in this way so that the Angular code has the least information about how the backend's innards do the work.
 
 #+begin_src html
-<div hx-get="http://localhost:8083/timer-init" hx-trigger="load"></div>
+<div hx-get="http://localhost:10000/timer-init" hx-trigger="load"></div>
 #+end_src
 
 The way I used HTMX for those 7 GUI tasks is not optimal, as each user interactions triggers a network call to the Java backend and returns HTML. The HTMX solutions are generally slower in the millisecond range compared to the pure Angular ones, but the delay is minimal, at least when the server is accessed through localhost.
@@ -36,7 +36,7 @@ I spend way too much time making sure that the HTMX API calls are only fired whe
 
 * Java backend server for HTMX
 
-The backend uses Spring Boot 3.1.5, Java 17, Gradle, Spring Web, Thymeleaf 3.1.2 and starts on port 8083 when launched. This was created via https://start.spring.io/
+The backend uses Spring Boot 3.1.5, Java 17, Gradle, Spring Web, Thymeleaf 3.1.2 and starts on port 10000 when launched. This was created via https://start.spring.io/
 
 It is deployed in the free tier on https://render.com and is accessible under https://java-7-guis.onrender.com/
 
@@ -51,7 +51,7 @@ cd spring-boot && ./gradlew bootRun
 The Dockerfile is provided for deployment. Run it via:
 
 #+begin_src bash
-docker build -t 7guis . && docker run --publish 8083:8083 7guis
+docker build -t 7guis . && docker run --publish 10000:10000 7guis
 #+end_src
 
 ** About Hot Reloading
@@ -91,7 +91,7 @@ Apparently I was not able to configure Hot Reload on localhost with the backend 
 
 (dima-spring-restart)
 (dima-spring-file-notifier)
-(dima-firefox-open-links "http://localhost:8083")
+(dima-firefox-open-links "http://localhost:10000")
 #+end_src
 
 * TODOs
