@@ -4,8 +4,6 @@
 
 Live Demo: https://angular-7-guis.netlify.app
 
-Funny note: If you have the Java backend server running under http://localhost:10000, the HTMX components in the Live Demo link above will also work!
-
 [[https://github.com/Dima-369/angular-htmx-7-guis/blob/master/screenshots/1.png?raw=true]]
 
 The 7 GUI tasks are detailed here: https://eugenkiss.github.io/7guis/tasks/
