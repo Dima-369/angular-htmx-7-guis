@@ -42,6 +42,16 @@ The backend uses Spring Boot 3.1.5, Java 17, Gradle and Thymeleaf 3.1.2 and star
 cd spring-boot && ./gradlew bootRun
 #+end_src
 
+Created via https://start.spring.io/ with Thymeleaf and Spring Web.
+
+** Dockerfile
+
+The Dockerfile is provided for deployment. Run it via:
+
+#+begin_src bash
+docker build --progress=plain -t 7guis . && docker run --publish 8083:8083 7guis
+#+end_src
+
 ** About Hot Reloading
 
 Apparently I was not able to configure Hot Reload with the backend server inside Intellij Community Edition, so I coded this Emacs Lisp to setup watchers on file changes and then restart the server manually which works just as well.
