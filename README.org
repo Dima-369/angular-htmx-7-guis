@@ -89,7 +89,8 @@ Apparently I was not able to configure Hot Reload on localhost with the backend 
 
 (dima-spring-restart)
 (dima-spring-file-notifier)
-(dima-firefox-open-links "http://localhost:10000")
+;; use angular's default port
+(dima-firefox-open-links "http://localhost:4200")
 #+end_src
 
 * TODOs
