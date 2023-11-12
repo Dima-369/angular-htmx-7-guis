@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 a {
-  @apply mb-3 text-2xl font-bold text-purple-600 my-9 block;
+  @apply text-2xl font-bold text-purple-600 mb-3 inline-block;
 }
 
 h3 {
