@@ -95,5 +95,6 @@ Apparently I was not able to configure Hot Reload on localhost with the backend 
 
 * TODOs
 
+- switch to glitch.com for the demo server since render.com takes far too long to wake up the server
 - finish all tasks (4.5 / 7 done) in Angular and HTMX
 - add tests for the non HTMX Components?
