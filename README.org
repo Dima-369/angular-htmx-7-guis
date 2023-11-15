@@ -2,7 +2,7 @@
 
 ** Angular with Tailwind CSS
 
-Live Demo: https://angular-7-guis.netlify.app
+Live Demo: https://angular-7-guis.netlify.app (note that the HTMX takes about a minute to load in sometimes since the free server at https://render.com sleeps and needs to wake up)
 
 [[https://github.com/Dima-369/angular-htmx-7-guis/blob/master/screenshots/1.png?raw=true]]
 
